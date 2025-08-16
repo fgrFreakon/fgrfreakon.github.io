@@ -1,48 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- ... meta tags, Font Awesome, styles as before ... -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Freakshow | fgrfreakon</title>
+
+  <!-- Open Graph for Social Sharing -->
+  <meta property="og:title" content="The Freakshow | fgrfreakon">
+  <meta property="og:description" content="Variety streamer on Kick, Trovo, Twitch & YouTube. Join the chaos!">
+  <meta property="og:image" content="https://static-cdn.jtvnw.net/jtv_user_pictures/7687106b-4129-489c-804c-42d9a5890345-profile_image-300x300.png">
+  <meta property="og:type" content="website">
+
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #121212, #1c1c1c);
+      color: #fff;
+    }
+
+    header {
+      background: linear-gradient(90deg, #7951C8, #EDBC33);
+      display: flex;
+      align-items: center;
+      padding: 15px 30px;
+    }
+
+    header img {
+      height: 60px;
+      margin-right: 20px;
+      border-radius: 50%;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin: 0;
+      color: #fff;
+      text-shadow: 2px 2px 5px #000;
+    }
+
+    .intro {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .intro h2 {
+      font-size: 2.2rem;
+      color: #EDBC33;
+      margin-bottom: 10px;
+    }
+
+    .intro p {
+      font-size: 1.2rem;
+      color: #ccc;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .socials {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .socials a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      color: white;
+      background: #7951C8;
+      padding: 15px;
+      border-radius: 12px;
+      transition: 0.3s;
+      font-weight: bold;
+      font-size: 1.1rem;
+      position: relative;
+    }
+
+    .socials a:hover {
+      background: #EDBC33;
+      color: #000;
+    }
+
+    /* Live Now Badge */
+    .live-badge {
+      background: red;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 4px 8px;
+      border-radius: 8px;
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      display: none;
+    }
+
+    footer {
+      background: #1e1e1e;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-top: 40px;
+    }
+  </style>
 </head>
 <body>
-  <!-- ... header and intro ... -->
+
+  <header>
+    <a href="/">
+      <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/7687106b-4129-489c-804c-42d9a5890345-profile_image-300x300.png" alt="Guy Fawkes Mask">
+    </a>
+    <h1>The Freakshow | fgrfreakon</h1>
+  </header>
+
+  <section class="intro">
+    <h2>Welcome to The Freakshow</h2>
+    <p>Hey, I’m <strong>fgrfreakon</strong> — a variety streamer on Kick, Trovo, Twitch, and YouTube. I play all kinds of games and bring the chaos with me. Join the Freakshow and let’s have some fun!</p>
+  </section>
 
   <section class="socials">
-    <a href="https://kick.com/fgrfreakon" target="_blank" id="kick-link">
-      <i class="fas fa-play-circle"></i> Kick
-      <span class="live-badge" id="kick-live-badge">LIVE</span>
-    </a>
+    <a href="https://kick.com" target="_blank"><i class="fas fa-play-circle"></i> Kick</a>
     <a href="https://trovo.live" target="_blank"><i class="fas fa-broadcast-tower"></i> Trovo</a>
     <a href="https://twitch.tv/fgrfreakon" target="_blank" id="twitch-link">
       <i class="fab fa-twitch"></i> Twitch
-      <span class="live-badge" id="twitch-live-badge">LIVE</span>
+      <span class="live-badge" id="live-badge">LIVE</span>
     </a>
     <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
   </section>
 
-  <!-- ... footer ... -->
+  <footer>
+    © 2025 The Freakshow | Designed for fgrfreakon
+  </footer>
 
+  <!-- Twitch Live Status Script -->
   <script>
-    // Existing Twitch live-check script...
     async function checkTwitchLive() {
-      // Twitch API logic here...
-    }
-    checkTwitchLive();
-
-    async function checkKickLive() {
       try {
+        const clientId = "YOUR_TWITCH_CLIENT_ID";
+        const accessToken = "YOUR_TWITCH_ACCESS_TOKEN";
         const username = "fgrfreakon";
-        const res = await fetch(`https://api.kick.com/api/v1/channels/${username}/livestream`);
-        if (!res.ok) throw new Error(`HTTP status ${res.status}`);
-        const data = await res.json();
-        if (data.is_live) {
-          document.getElementById("kick-live-badge").style.display = "inline-block";
+
+        const response = await fetch(`https://api.twitch.tv/helix/streams?user_login=${username}`, {
+          headers: {
+            "Client-ID": clientId,
+            "Authorization": `Bearer ${accessToken}`
+          }
+        });
+
+        const data = await response.json();
+        if (data.data && data.data.length > 0) {
+          document.getElementById("live-badge").style.display = "inline-block";
         }
-      } catch (e) {
-        console.error("Error checking Kick live status:", e);
+      } catch (err) {
+        console.error("Error fetching Twitch live status", err);
       }
     }
-    checkKickLive();
-    setInterval(checkKickLive, 60000);
+
+    checkTwitchLive();
   </script>
+
 </body>
 </html>
