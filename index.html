@@ -101,10 +101,6 @@
     <p>Hey, I’m fgrfreakon — a variety streamer on Kick, Trovo, Twitch, and YouTube. I play all kinds of games and bring the chaos with me. Join the Freakshow and let’s have some fun!</p>
   </section>
 
-  <div style="text-align: center; margin: 20px 0;">
-  <a href="url">link text</a>
-</div>
-
   <section class="socials">
     <a href="https://kick.com/fgrfreakon" target="_blank">Kick</a>
     <a href="https://trovo.live/s/fgrfreakon" target="_blank">Trovo</a>
@@ -139,53 +135,13 @@
   </a>
 </section>
 
-  </div>
-</section>
-
-  <!-- Share My Website Button -->
-<div style="text-align: center; margin: 20px 0;">
-  <button class="share-btn" onclick="shareWebsite()">Click Here to share</button>
-</div>
-
-<script>
-  function shareWebsite() {
-    const websiteUrl = "https://fgrfreakon.github.io/";
-
-    if (navigator.share) {
-      navigator.share({
-        title: "Check out this website!",
-        url: websiteUrl
-      }).catch(console.error);
-    } else {
-      navigator.clipboard.writeText(websiteUrl).then(() => {
-        alert("Link copied to clipboard!");
-      });
-    }
-  }
-</script>
-
-<style>
-  .share-btn {
-    background-color: #edbc33;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s;
-  }
-  .share-btn:hover {
-    background-color: #45a049;
-  }
-</style>
-
-  <footer>
+<footer>
     © 2025 The Freakshow | Designed by fgrfreakon
   </footer>
 
 </body>
 </html>
+
 
 
 
